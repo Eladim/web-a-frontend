@@ -1,0 +1,38 @@
+/* src/components/layout/Sidebar.css */
+
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: var(--spacing-medium);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-links li {
+    margin-bottom: var(--spacing-large);
+  }
+  
+  .sidebar-links li a {
+    color: var(--secondary-color);
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-medium);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .sidebar-links li a:hover {
+    color: var(--button-hover-color);
+  }
+  

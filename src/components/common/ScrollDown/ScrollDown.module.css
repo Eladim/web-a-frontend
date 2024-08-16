@@ -1,0 +1,20 @@
+.scrollDown {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #7c645a;
+    font-size: 32px;
+    font-weight: 800;
+    transform: translate(-50%, -50%);
+  }
+  
+  .scrollDown svg {
+    margin-top: 16px;
+    width: 52px;
+    fill: currentColor;
+  }
+  

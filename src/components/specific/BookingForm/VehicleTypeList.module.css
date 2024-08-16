@@ -1,0 +1,9 @@
+/* VehicleTypeList.module.css */
+
+.vehicleTypeListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
+    margin-bottom: var(--spacing-small);
+}

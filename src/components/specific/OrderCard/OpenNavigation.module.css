@@ -1,0 +1,12 @@
+.icon {
+    cursor: pointer;
+    font-size: 50px; /* Adjust size as needed */
+    color: #007bff;
+    display: block; /* Ensure it's treated as a block element */
+    text-align: right; /* Align the icon to the left */
+  }
+  
+  .icon:hover {
+    color: #0056b3;
+  }
+  

@@ -1,0 +1,17 @@
+.formError {
+    color: var(--error-color);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-medium);
+    margin-top: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+}
+
+
+.horizontalLine {
+    margin-top: var(--spacing-medium);  /* Use your defined spacing */
+    margin-bottom: var(--spacing-medium);
+    border: none;  /* Remove the default border style */
+    border-top: 2px solid var(--input-border-color);  /* Use primary color */
+    width: 100%;  /* Ensure the line spans the full width */
+  }
+  

@@ -1,0 +1,45 @@
+/* FormInput.module.css */
+
+/* Form Group (wrapper for label and input/select) */
+.formGroup {
+    margin-bottom: var(--spacing-large);
+}
+
+/* Form Label */
+.formLabel {
+    display: block;
+    margin-bottom: var(--spacing-small);
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+    font-size: var(--font-size-medium);
+}
+
+/* Form Control (input and select) */
+.formControl {
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-medium);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--input-background-color);
+    transition: border-color 0.3s ease;
+}
+
+.formControl:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none;
+}
+.formError {
+    color: var(--error-color);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-medium);
+    margin-top: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+}
+
+
+/* Error Message Styling */

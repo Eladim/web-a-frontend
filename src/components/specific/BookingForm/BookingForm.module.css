@@ -1,0 +1,331 @@
+/* BookingForm.module.css */
+
+/* Booking Form Container */
+.bookingFormContainer {
+    background-color: var(--secondary-color);
+    padding: var(--spacing-large);
+    padding-bottom: 0px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 85%; 
+    max-width: 550px;
+    margin: 0 auto;
+}
+/* When the success message is visible */
+.successMessage {
+  height: 1152px; /* Start height */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.successMessage.shrink {
+  height: 145px; /* End height */
+}
+
+@keyframes shrinkHeight {
+  from {
+    height: 1152px;
+  }
+  to {
+    height: 145px;
+  }
+}
+
+.successMessage.shrink {
+  animation: shrinkHeight 0.5s ease-in-out forwards;
+}
+
+/* Specific styling for fields in BookingForm */
+.specialBookingField {
+    margin-bottom: var(--spacing-small);
+    padding: var(--spacing-small);
+    border: 2px solid var(--primary-color);
+}
+/* Apply submitButton styles to all buttons within bookingFormContainer */
+.bookingFormContainer button {
+    background-color: var(--button-background-color);
+    color: var(--secondary-color);
+    padding: var(--spacing-small) var(--spacing-large);
+    font-family: var(--font-family-sans);
+    /*font-weight: var(--font-weight-bold);*/
+    font-size: var(--font-size-medium);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bookingFormContainer button:hover {
+    background-color: var(--button-hover-color);
+}
+
+
+/* Submit Button */
+.submitButton {
+    background-color: var(--button-background-color);
+    color: var(--secondary-color);
+    padding: var(--spacing-small) var(--spacing-large);
+    font-family: var(--font-family-sans);
+    /*font-weight: var(--font-weight-bold); */
+    font-size: var(--font-size-medium);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: var(--button-hover-color);
+}
+
+.formError {
+    color: var(--error-color);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-small);
+    margin-top: -var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+}
+
+
+.vehicleTypeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust the spacing between label and toggle */
+    margin-bottom: var(--spacing-small); /* Add space below the vehicle type section */
+  }
+  
+  .vehicleTypeLabel {
+    margin-right: var(--spacing-medium); /* Adjust the space between the label and the select box */
+  }
+  
+  .toggleContainer {
+    display: flex;
+    align-items: center;
+    margin-left: var(--spacing-medium); /* Add space between the select box and the toggle */
+  }
+
+
+.toggleLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .toggleInput {
+    margin-right: var(--spacing-small);
+    transform: scale(1.2); /* Make the checkbox a bit larger */
+  }
+  
+  .toggleContainer {
+    margin-bottom: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .toggleContainer span {
+    margin-right: var(--spacing-small); /* Add space between the text and the toggle */
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--primary-color);
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(19px);
+  }
+  
+  /* Optional: Add a shadow effect when the toggle is active */
+  .slider:before {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  /* VehicleTypeList.module.css */
+.vehicleTypeListContainer {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, max-height 0.7s ease-in-out;
+  }
+  
+  .vehicleTypeListContainer.show {
+    opacity: 1;
+    max-height: 1000px; /* Adjust as necessary, or set to none for full height */
+  }
+
+
+.buttonAndTotalContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will push the total cost to the right */
+    margin-top: var(--spacing-medium); /* Adds space above the button and total cost section */
+    padding-bottom: 0px;
+    max-height: 0; /* Start with zero height */
+    opacity: 0;    /* Start with zero opacity */
+    overflow: visible;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding-bottom 0.6s ease;; /* Smooth transition */
+}
+
+.buttonAndTotalContainer.show {
+    max-height: 200px; /* Or another value that fits your content */
+    opacity: 1;        /* Full opacity */
+    padding-bottom: var(--spacing-large);
+}
+
+.totalCost {
+    margin: 0px;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-normal); /* Makes the total cost text bold */
+}
+.totalCost
+{
+  overflow: visible;
+}
+
+.adjustHeight {
+  height: 0px; 
+  /* Base styles */
+  transition: all 0.5s ease-out; /* Ensure smooth transitions */
+}
+
+.expand {
+  height: 438px; /* Example expanded height */
+  max-height: 500px;
+  width: 100%;
+  /* Any other styles you want when expanded */
+}
+
+.expandRoadMap {
+  height: 620px; /* Example expanded height */
+  width: 100%;
+  /* Any other styles you want when expanded */
+}
+.expandP {
+  height: 500px; /* Example expanded height */
+  width: 100%;
+  /* Any other styles you want when expanded */
+}
+
+
+
+
+/* General container styles for the span */
+.container {
+  display: inline-flex; /* Allow it to fit within text */
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Icon container styles */
+.iconContainer {
+  position: relative;
+  display: inline-flex; /* Allows for better inline handling */
+  align-items: center;
+  top: 3px;
+}
+
+/* Icon styles */
+.icon {
+  font-size: 1.5rem; /* Adjusted to better fit within text */
+  cursor: pointer;
+  color: #333; /* Darker color for better visibility */
+  transition: color 0.3s ease; /* Smooth color transition */
+  margin-left: 4px; /* Slight spacing between text and icon */
+}
+
+.icon:hover {
+  color: #007BFF; /* Change color on hover */
+}
+
+/* List styles */
+.list {
+  position: absolute;
+  bottom: 120%; /* Position above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Softer border */
+  border-radius: 8px; /* Slightly larger border-radius */
+  padding: 8px 12px; /* Adjusted padding for better alignment */
+  list-style-type: none;
+  margin: 0;
+  white-space: nowrap;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  opacity: 0; /* Start hidden */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth appearance */
+  z-index: 9999; /* Ensure it appears above other elements */
+  max-width: 300px; /* Optional: Limit width to prevent overflow */
+}
+
+/* Show the list on hover */
+.iconContainer:hover .list {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* List item styles */
+.list li {
+  padding: 5px 0;
+  font-size: 0.9rem; /* Adjusted font size for better inline text flow */
+  color: #333; /* Ensure text color matches the icon */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list li:hover {
+  background-color: #ffffff; /* Light background on hover */
+}
+
+
+/* Accessibility improvements */
+.icon:focus + .list, 
+.iconContainer:hover .list,
+.iconContainer:focus-within .list {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure bubble visibility even outside p tag */
+p {
+  overflow: visible; /* Allows content to overflow the p boundaries */
+}

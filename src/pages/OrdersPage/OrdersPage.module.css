@@ -1,0 +1,36 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background-color: #f7f9fc;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: var(--spacing-medium);
+  }
+  
+  .mainContent { /* CSS modules use camelCase for class names when imported */
+    flex-grow: 1;
+    padding: var(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar {
+    background-color: var(--primary-color);
+    padding: var(--spacing-medium);
+    color: var(--secondary-color);
+  }
+  
+  .searchBar { /* CamelCase used for the class name */
+    margin: var(--spacing-medium) 0;
+  }
+  
+  .ordersGrid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+  }
+  

@@ -1,0 +1,45 @@
+/* VehicleTypeCard.module.css */
+
+.cardContainer {
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    padding: 16px;
+    margin: 8px;
+    width: 100vh;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.vehicleType {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.capacity {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.cardBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.initialPrice {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+.pricePerKm {
+    font-size: 0.9rem;
+    color: #333;
+}

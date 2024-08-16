@@ -1,0 +1,33 @@
+/* BookingPage.module.css */
+.bookingPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the form horizontally */
+  justify-content: center; /* Center the form vertically if needed */
+  min-height: 100vh; /* Ensure the page takes up full height */
+  padding: 20px; /* Add some padding around the content */
+  background-color: var(--background-color); /* Apply a background color */
+}
+
+.bookingFormContainer {
+  max-width: 720px; /* Set a max width for the form */
+  width: 100%; /* Make the form container responsive */
+  padding: 20px; /* Add padding around the form */
+  background-color: var(--secondary-color); /* Background color for the form */
+  border-radius: var(--border-radius); /* Apply border radius */
+  box-shadow: var(--box-shadow); /* Apply a shadow to elevate the form */
+}
+
+/* Overlay Styling */
+.overlay {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  background-color: rgba(0, 0, 0, 0); /* Optional: Adjust the background color */
+  color: #000; /* Adjust text color if necessary */
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 10; /* Ensure it sits above other elements */
+  width: 300px; /* Adjust width as necessary */
+  height: auto; /* Allow height to adjust based on content */
+}

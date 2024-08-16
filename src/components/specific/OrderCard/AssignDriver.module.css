@@ -1,0 +1,281 @@
+.assignButton {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: var(--spacing-small);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: var(--spacing-small);
+}
+
+.assignButton:hover {
+  background-color: var(--button-hover-color);
+}
+
+.assignButtonIcon {
+  cursor: pointer;
+  font-size: 50px; /* Adjust size as needed */
+  color: #007bff;  /* Adjust color as needed */
+}
+
+.assignButtonIcon:hover {
+  color: #0056b3;  /* Change color on hover */
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto; /* Allow scrolling if the modal content is too tall */
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-width: 500px;
+  width: 100%;
+  max-height: 70vh; /* Make the pop-up a bit longer, but not more than 80% of the viewport height */
+  overflow: hidden; /* Ensure zoomed drivers stay within boundaries */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  
+}
+
+
+.searchInput {
+  width: 93%;
+  padding: 10px 15px; /* Comfortable padding */
+  margin-bottom: var(--spacing-medium); /* Space below the search bar */
+  border: 1px solid var(--input-border-color); /* Subtle border */
+  border-radius: var(--border-radius); /* Rounded corners */
+  font-size: var(--font-size-medium); /* Clear and readable font size */
+  background-color: var(--input-background-color); /* Light background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color); /* Highlighted border color on focus */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on focus */
+  outline: none; /* Remove the default outline */
+}
+
+.searchInput::placeholder {
+  color: #888; /* Subtle placeholder color */
+  font-style: italic; /* Optional: Italic style for placeholder text */
+}
+
+.driverList {
+  list-style: none;
+  padding: var(--spacing-small); /* Add padding around the list */
+  margin: var(--spacing-small) 0;
+  flex-grow: 1; /* Allow the list to grow and fill available space */
+  height: 45vh; /* Set a minimum height for consistency */
+  max-height: calc(100% - 100px); /* Ensure it doesn't exceed the available space */
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box; /* Ensure padding is included in the element's total width/height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to the top */
+}
+.driverItem {
+  margin-bottom: var(--spacing-small);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.driverLabel {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-small);
+  border-radius: var(--border-radius);
+  background-color: var(--input-background-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.driverLabel:hover {
+  background-color: #f0f0f0;
+}
+
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: var(--spacing-small);
+}
+
+.driverInfo {
+  flex-grow: 1;
+}
+
+.driverName {
+  font-weight: var(--font-weight-bold);
+}
+
+.driverStatus {
+  font-size: var(--font-size-small);
+  color: #888;
+}
+
+/* Hide the radio input */
+.radioInput {
+  display: none;
+}
+
+.statusSignal {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-idle {
+  background: linear-gradient(135deg, rgba(24, 134, 24, 0.7), rgba(24, 134, 24, 0.9)); /* Green gradient */
+}
+
+.status-on_the_road{
+  background: linear-gradient(135deg, rgba(70, 130, 180, 0.7), rgba(70, 130, 180, 0.9)); /* Steel blue gradient */
+}
+
+.status-unavailable {
+  background: linear-gradient(135deg, rgba(187, 31, 31, 0.7), rgba(187, 31, 31, 0.9)); /* Red gradient */
+}
+
+/* Highlight the selected driver by enlarging the container */
+.selected {
+  background-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: scale(1.01); /* Slightly increase the size */
+  padding: 1px; /* Increase padding to make the background thicker */
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--spacing-medium);
+}
+
+.saveButton {
+  background: linear-gradient(135deg, rgba(24, 134, 24, 0.7), rgba(24, 134, 24, 0.9)); /* Green gradient */
+  transition: box-shadow 0.3s ease-in-out;
+  color: #fff;
+  padding: var(--spacing-small);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #218838;
+}
+
+.saveButton:disabled {
+  background: linear-gradient(135deg, rgba(169, 169, 169, 0.7), rgba(169, 169, 169, 0.9)); /* Grey gradient */
+  cursor: not-allowed; /* Change cursor to indicate button is not clickable */
+  opacity: 0.6; /* Slightly reduce opacity */
+  box-shadow: none; /* Remove box-shadow */
+}
+
+.closeButton {
+  background-color: var(--error-color);
+  color: #fff;
+  padding: var(--spacing-small);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: darkred;
+}
+
+
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggleInput {
+  margin-right: var(--spacing-small);
+  transform: scale(1.2); /* Make the checkbox a bit larger */
+}
+
+.toggleContainer {
+  margin-bottom: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.toggleContainer span {
+  margin-right: var(--spacing-small); /* Add space between the text and the toggle */
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(19px);
+}
+
+/* Optional: Add a shadow effect when the toggle is active */
+.slider:before {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
