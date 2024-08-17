@@ -718,31 +718,9 @@ const end = useMemo(() => {
                             </div>
                         )}
                     </div>
-                    <button
-    type="button"
-    onClick={(e) => {
-        if (showViewMap) {
-            const form = e.currentTarget.form;
-            if (form) {
-                // Manually trigger form validation
-                if (form.checkValidity()) {
-                    form.submit(); // Submit the form if all required fields are valid
-                } else {
-                    form.reportValidity(); // Report the issues to the user
-                }
-            }
-        } else {
-            handleViewMapClick(); // Toggle the map view
-        }
-    }}
-    disabled={isSubmitting || !start || !end} // Disable if submitting or if start or end is not valid
->
-    {isSubmitting
-        ? 'Submitting...'
-        : showViewMap
-            ? 'Submit Booking'
-            : 'Approve Path'}
-</button>
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Submitting...' : 'Submit Booking'}
+                    </button>
 
 
 
