@@ -18,13 +18,12 @@ const DriverService = {
       });
   },
 
-    /**
+  /**
    * Assign a driver to an order
    * @param {number} orderId - The ID of the order to assign a driver to
    * @param {number} driverId - The ID of the driver to assign
    * @returns {Promise} - Promise resolving to the updated order
    */
-
   assignDriverToOrder(orderId, driverId) {
     return apiClient.post(`/vehicles/driver-to-order/${orderId}/assign_driver/`, { driver_id: driverId })
       .then(response => {
@@ -36,8 +35,6 @@ const DriverService = {
         throw error;
       });
   },
-
-  
 };
 
 // Export the DriverService object

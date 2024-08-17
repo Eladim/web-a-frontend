@@ -13,18 +13,20 @@ import AlphaTest from  './components/specific/BookingForm/InfoIcon.js'
 import Cal from  './components/specific/GoogleMap/calculatortest.js'
 
 function App() {
+
+  
   return (
     <Router>
       <div className="App">
         <Routes>
         <Route path="/cal" element={<Cal />} />
         <Route path="/hover2" element={<AlphaTest />} />
-          <Route path="/" element={<RoadMapTest />} />
+          <Route path="/roadtest" element={<RoadMapTest />} />
           <Route path="/hover" element={<Icon />} />
           <Route path="/testmap" element={<Test />} />
           <Route path="/googlemap" element={<GoogleMap />} />
           <Route path="/reservation" element={<BookingPage />} />
-          <Route path="/login" element={<AuthPage />} />
+          <Route path="/" element={<AuthPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/login-page" element={<LoginPage />} />
         </Routes>

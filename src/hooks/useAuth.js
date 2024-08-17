@@ -1,64 +1,56 @@
-// src/hooks/useAuth.js
-
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { loginService, logoutService, signupService } from '../services/authService';
+import { loginService, logoutService, registerService } from '../services/authService';
 
 export const useAuth = () => {
-  const { setAuthState } = useContext(AuthContext);  // Get the context's setAuthState function
-  const [error, setError] = useState(null);  // State to manage errors
+  const { authState, setAuthState } = useContext(AuthContext);
+  const [error, setError] = useState(null);
 
   // Login function
-  const login = async ({ email, password }) => {
+  const login = async ({ username, password }) => {
     try {
-      const user = await loginService({ email, password });  // No token, just the user data
-      
+      const user = await loginService({ username, password });
+
       // Set the authentication state with user data
-      setAuthState(user);
+      setAuthState({ ...user });
 
       // Clear any previous errors
       setError(null);
 
-      // Return the user data to the caller (important for redirection logic)
       return user;
     } catch (err) {
-      // Set the error state with a meaningful message
       setError('Invalid credentials. Please try again.');
+      throw err;
+    }
+  };
+  // Register function (formerly signup)
+  const register = async ({ email, password, name }) => {
+    try {
+      const user = await registerService({ email, password, name });
 
-      // Throw the error so it can be caught by the caller
+      // Automatically log the user in after registration (optional)
+      await login({ email, password });
+
+      // Clear any previous errors
+      setError(null);
+
+      return user;
+    } catch (err) {
+      setError('Registration failed. Please try again.');
       throw err;
     }
   };
 
   // Logout function
   const logout = () => {
-    // Clear the auth state in the context
+    // Clear the auth state and localStorage
     setAuthState(null);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
 
-    // Call the logout service
+    // Call the logout service (if any)
     logoutService();
   };
 
-  // Signup function (optional if you're handling user registration)
-  const signup = async ({ email, password, name }) => {
-    try {
-      await signupService({ email, password, name });  // Register the user
-      
-      // Automatically log the user in after signup
-      const user = await login({ email, password });
-
-      // Clear any previous errors
-      setError(null);
-
-      return user;
-    } catch (err) {
-      // Set the error state with a meaningful message
-      setError('Signup failed. Please try again.');
-
-      // Throw the error so it can be caught by the caller
-      throw err;
-    }
-  };
-
-  return { login, logout, signup, error };  // Return the auth functions and error state
+  return { authState, login, logout, register, error };  // Updated to return `register` instead of `signup`
 };

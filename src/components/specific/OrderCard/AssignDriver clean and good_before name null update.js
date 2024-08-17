@@ -53,7 +53,7 @@ const AssignDriver = ({ drivers = [], onAssignDriver }) => {
 
   // Filter drivers based on search term and status
   const filteredDrivers = drivers.filter(driver => {
-    const matchesSearchTerm = driver.driver_name && driver.driver_name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearchTerm = driver.driver_name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = showAll || driver.status === 'idle';
     return matchesSearchTerm && matchesStatus;
   });
@@ -102,7 +102,7 @@ const AssignDriver = ({ drivers = [], onAssignDriver }) => {
                 >
                   <label className={styles.driverLabel}>
                     <div className={styles.driverInfo}>
-                      <span className={styles.driverName}>{driver.driver_name || 'Unnamed Driver'}</span>
+                      <span className={styles.driverName}>{driver.driver_name}</span>
                       <div>
                         <span className={styles.driverStatus}>{driver.current_area}</span>
                       </div>
