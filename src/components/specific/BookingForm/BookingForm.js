@@ -177,9 +177,9 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
 
             const bookingPrice = parseFloat(selectedVehicle.booking_price.replace('€', ''));
             const costPerKm = parseFloat(selectedVehicle.cost_per_km.replace('€', ''));
-
+            const effectiveDistance = (numericDistance && !isNaN(numericDistance)) ? numericDistance : 0;
             const activeFeeMultiplier = totalFeePercentage / 100;
-            const totalPriceBeforeFee = (numericDistance * costPerKm) + bookingPrice;
+            const totalPriceBeforeFee = (effectiveDistance * costPerKm) + bookingPrice;
             const totalPriceAfterFee = totalPriceBeforeFee * (1 + activeFeeMultiplier);
 
             console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
