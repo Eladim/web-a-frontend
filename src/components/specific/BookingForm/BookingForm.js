@@ -182,6 +182,10 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
             const totalPriceBeforeFee = (effectiveDistance * costPerKm) + bookingPrice;
             const totalPriceAfterFee = totalPriceBeforeFee * (1 + activeFeeMultiplier);
 
+            if (isNaN(totalPriceAfterFee)) {
+                totalPriceAfterFee = 0;
+            }
+
             console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
             console.log(`Total Price After Fee: €${totalPriceAfterFee.toFixed(2)}`);
             setFilteredFees(applicableFees);
@@ -718,9 +722,25 @@ const end = useMemo(() => {
                             </div>
                         )}
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Submit Booking'}
-                    </button>
+                    <button
+  type={showViewMap ? "submit" : "button"}
+  onClick={(e) => {
+    if (!showViewMap) {
+      e.preventDefault(); // Prevent form submission
+      handleViewMapClick(); // Trigger the view map logic
+    }
+  }}
+  disabled={
+    (showViewMap && isSubmitting) || (!showViewMap && (!start || !end))
+  } // Disable based on conditions
+  className={!showViewMap && (!start || !end) ? 'disabled' : ''}
+>
+  {isSubmitting
+    ? 'Submitting...'
+    : showViewMap
+    ? 'Submit Booking'
+    : 'Approve Path'}
+</button>
 
 
 
