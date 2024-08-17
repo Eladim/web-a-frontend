@@ -260,7 +260,7 @@
   position: relative;
   display: inline-flex; /* Allows for better inline handling */
   align-items: center;
-  top: 3px;
+  top: 4px;
 }
 
 /* Icon styles */
@@ -273,7 +273,7 @@
 }
 
 .icon:hover {
-  color: #007BFF; /* Change color on hover */
+  color: var(--button-hover-color); /* Change color on hover */
 }
 
 /* List styles */

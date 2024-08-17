@@ -10,12 +10,14 @@ import Test from  './components/specific/GoogleMap/Test.js'
 import Icon from  './components/specific/GoogleMap/Icon.js'
 import RoadMapTest from  './components/specific/GoogleMap/RoadMaptest.js'
 import AlphaTest from  './components/specific/BookingForm/InfoIcon.js'
+import Cal from  './components/specific/GoogleMap/calculatortest.js'
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
+        <Route path="/cal" element={<Cal />} />
         <Route path="/hover2" element={<AlphaTest />} />
           <Route path="/" element={<RoadMapTest />} />
           <Route path="/hover" element={<Icon />} />

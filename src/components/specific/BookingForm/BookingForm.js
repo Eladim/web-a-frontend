@@ -61,6 +61,11 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
     const [filteredFees, setFilteredFees] = useState(null);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const [showList, setShowList] = useState(false);
+    const [distance, setDistance] = useState('');
+
+    const handleDistanceChange = (newDistance) => {
+        setDistance(newDistance);
+    };
 
     const handleMouseEnter = () => {
         setShowList(true);
@@ -72,7 +77,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
 
     const handleViewMapClick = () => {
 
-        
+
         const nextShowMapState = !showViewMap;
         setViewMap(nextShowMapState);
         setShowFromMap(false);
@@ -103,6 +108,8 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
     };
 
 
+
+
     useEffect(() => {
         // Fetch locations from API
 
@@ -123,8 +130,10 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
         if (selectedLocation && selectedLocation.type === 'hotel') {
             distanceToAirport = selectedLocation.distance_to_airport;
             console.log(`Retrieved Distance to Airport: ${distanceToAirport} km`);
+            console.log(`Retrieved Distance: ${distance} km`);
         }
-
+        const numericDistance = parseFloat(distance.replace('km', '').trim());
+        console.log(`Parsed Numeric Distance: ${numericDistance} km`);
         setIsFormComplete(checkIsFormComplete(formData));
         const now = new Date();
         const offset = now.getTimezoneOffset();
@@ -170,7 +179,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
             const costPerKm = parseFloat(selectedVehicle.cost_per_km.replace('€', ''));
 
             const activeFeeMultiplier = totalFeePercentage / 100;
-            const totalPriceBeforeFee = (distanceToAirport * costPerKm) + bookingPrice;
+            const totalPriceBeforeFee = (numericDistance * costPerKm) + bookingPrice;
             const totalPriceAfterFee = totalPriceBeforeFee * (1 + activeFeeMultiplier);
 
             console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
@@ -182,7 +191,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
         } else {
             console.log('No valid vehicle type selected for calculation.');
         }
-    }, [formData, locations, vehicleTypes,]);
+    }, [formData, locations, vehicleTypes, distance]);
 
     // Handle changes to "From Location"
     useEffect(() => {
@@ -369,10 +378,10 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
                 return locations.filter(loc => loc.type === 'transfer_point');
             }
         }
-        // Default to showing all locations if no specific type is selected
-        return locations;
+        // Default: Show all locations except those of type 'region'
+        return locations.filter(loc => loc.type !== 'region');
     };
-
+    
 
 
     const getNotesPlaceholder = (type) => {
@@ -408,19 +417,41 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
     };
 
     // Create the start and end coordinates from formData dynamically
-    const start = useMemo(() => {
-        return formData.from_lat && formData.from_lng ? {
+const start = useMemo(() => {
+    if (formData.from_lat && formData.from_lng) {
+        return {
             lat: parseFloat(formData.from_lat),
             lng: parseFloat(formData.from_lng),
-        } : null;
-    }, [formData.from_lat, formData.from_lng]);
-    
-    const end = useMemo(() => {
-        return formData.to_lat && formData.to_lng ? {
+        };
+    } else if (formData.from_location) {
+        const location = locations.find(loc => loc.id === parseInt(formData.from_location));
+        if (location && !showViewMap) {                                                                              ///Prevents reseting of values
+            return {
+                lat: location.latitude,
+                lng: location.longitude,
+            };
+        }
+    }
+    return null; // If neither coordinates nor a valid location is available
+}, [formData.from_lat, formData.from_lng, formData.from_location, locations]);
+
+const end = useMemo(() => {
+    if (formData.to_lat && formData.to_lng) {
+        return {
             lat: parseFloat(formData.to_lat),
             lng: parseFloat(formData.to_lng),
-        } : null;
-    }, [formData.to_lat, formData.to_lng]);
+        };
+    } else if (formData.to_location) {
+        const location = locations.find(loc => loc.id === parseInt(formData.to_location));
+        if (location && !showViewMap) {                                                                    ///Prevents reseting of values
+            return {
+                lat: location.latitude,
+                lng: location.longitude,
+            };
+        }
+    }
+    return null; // If neither coordinates nor a valid location is available
+}, [formData.to_lat, formData.to_lng, formData.to_location, locations]);
 
     return (
 
@@ -555,7 +586,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
 
 
                     <div className={`${styles.adjustHeight} ${showFromMap ? styles.expand : ''}`}>
-                        {showFromMap && renderFromMap && fromLocation && fromLocation.latitude && fromLocation.longitude &&  (
+                        {showFromMap && renderFromMap && fromLocation && fromLocation.latitude && fromLocation.longitude && (
                             <div className={styles.mapContainer}>
                                 <Map
                                     center={{
@@ -646,7 +677,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
                                     {/* Some UI where the user can select locations */}
 
                                     {/* Render the RoadMap component dynamically based on the selected locations */}
-                                    <RoadMap start={start} end={end} mode="DRIVING" />
+                                    <RoadMap start={start} end={end} mode="DRIVING" onDistanceChange={handleDistanceChange} />
 
                                     {/* Additional UI or forms for selecting locations */}
                                 </div>
@@ -655,40 +686,65 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
                     </div>
 
 
-                    <div className={`${styles.buttonAndTotalContainer} ${isFormComplete ? styles.show : ''}`}>
-    <div className={styles.totalCost}>
-        <span>{activeFee !== null ? `Service Fee: ${activeFee.toFixed(2)}%  ` : 'Service Fee: N/A  '}</span>
-        <span className={styles.container}>
-            <span
-                className={styles.iconContainer}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onTouchStart={handleMouseEnter}
-                onTouchEnd={handleMouseLeave}
-            >
-                <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} />
-                <ul className={`${styles.list} ${showList ? styles.visible : ''}`}>
-                    {filteredFees && filteredFees.length > 0 ? (
-                        filteredFees.map(fee => (
-                            <li key={fee.id}>{fee.name} {parseFloat(fee.fee_percentage).toString().replace(/\.0+$/, '')}%</li>
-                        ))
-                    ) : (
-                        <li>No Fees applied</li>
-                    )}
-                </ul>
-            </span>
-        </span>
-    </div>
+                    <div className={`${styles.buttonAndTotalContainer} ${(isFormComplete && showViewMap) ? styles.show : ''}`}>
 
-    {totalPriceAfterFee !== null && (
-        <div className={styles.totalCost}>
-            <span>Total Cost: €{totalPriceAfterFee.toFixed(2)}</span>
-        </div>
-    )}
-</div>
-                    <button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Submit Booking'}
-                    </button>
+                        <div className={styles.totalCost}>
+                            <span>{activeFee !== null ? `Service Fee: ${activeFee.toFixed(2)}%  ` : 'Service Fee: N/A  '}</span>
+                            <span className={styles.container}>
+                                <span
+                                    className={styles.iconContainer}
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                    onTouchStart={handleMouseEnter}
+                                    onTouchEnd={handleMouseLeave}
+                                >
+                                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} />
+                                    <ul className={`${styles.list} ${showList ? styles.visible : ''}`}>
+                                        {filteredFees && filteredFees.length > 0 ? (
+                                            filteredFees.map(fee => (
+                                                <li key={fee.id}>{fee.name} {parseFloat(fee.fee_percentage).toString().replace(/\.0+$/, '')}%</li>
+                                            ))
+                                        ) : (
+                                            <li>No Fees applied</li>
+                                        )}
+                                    </ul>
+                                </span>
+                            </span>
+                        </div>
+
+                        {totalPriceAfterFee !== null && (
+                            <div className={styles.totalCost}>
+                                <span>Total Cost: €{totalPriceAfterFee.toFixed(2)}</span>
+                            </div>
+                        )}
+                    </div>
+                    <button
+    type="button"
+    onClick={(e) => {
+        if (showViewMap) {
+            const form = e.currentTarget.form;
+            if (form) {
+                // Manually trigger form validation
+                if (form.checkValidity()) {
+                    form.submit(); // Submit the form if all required fields are valid
+                } else {
+                    form.reportValidity(); // Report the issues to the user
+                }
+            }
+        } else {
+            handleViewMapClick(); // Toggle the map view
+        }
+    }}
+    disabled={isSubmitting || !start || !end} // Disable if submitting or if start or end is not valid
+>
+    {isSubmitting
+        ? 'Submitting...'
+        : showViewMap
+            ? 'Submit Booking'
+            : 'Approve Path'}
+</button>
+
+
 
                     {errors.non_field_errors && (
                         <div className={styles.formError}>

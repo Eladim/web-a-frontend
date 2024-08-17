@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { GoogleMap, DirectionsRenderer, Marker } from '@react-google-maps/api';
+import { GoogleMap, DirectionsRenderer, Marker, Circle } from '@react-google-maps/api';
 import { useLoadGoogleMapsApi } from '../../../hooks/useLoadGoogleMapsApi'; // Adjust the import path accordingly
 
 import startMarkerIcon from '../../../assets/images/PersonPin.png';  // End marker icon
 import customPositionMarkerIcon from '../../../assets/images/Pin.png';  // Start marker icon
 
-const RoadMap = ({ start, end, mode = 'DRIVING', onDistanceChange }) => {
+const RoadMap = ({ start, end, mode = 'DRIVING' }) => { 
   const { isLoaded, loadError } = useLoadGoogleMapsApi();
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
@@ -27,24 +27,18 @@ const RoadMap = ({ start, end, mode = 'DRIVING', onDistanceChange }) => {
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK) {
             setDirectionsResponse(result);
-            const distanceValue = result.routes[0].legs[0].distance.text;
-            setDistance(distanceValue);
+            setDistance(result.routes[0].legs[0].distance.text);
             setDuration(result.routes[0].legs[0].duration.text);
             const path = result.routes[0].overview_path.map(p => ({ lat: p.lat(), lng: p.lng() }));
             setPath(path);
             setStartTime(Date.now()); // Initialize the start time
-
-            // Call the onDistanceChange callback with the new distance
-            if (onDistanceChange) {
-              onDistanceChange(distanceValue);
-            }
           } else {
             console.error(`Error fetching directions: ${status}`);
           }
         }
       );
     }
-  }, [isLoaded, start, end, mode, onDistanceChange]);
+  }, [isLoaded, start, end, mode]);
 
   useEffect(() => {
     if (path.length > 0 && startTime) {
@@ -70,6 +64,8 @@ const RoadMap = ({ start, end, mode = 'DRIVING', onDistanceChange }) => {
     }
   }, [path, startTime]);
 
+  
+
   const mapContainerStyle = {
     width: '100%',
     height: '550px',
@@ -79,13 +75,16 @@ const RoadMap = ({ start, end, mode = 'DRIVING', onDistanceChange }) => {
     lat: (start.lat + end.lat) / 2,
     lng: (start.lng + end.lng) / 2,
   }), [start, end]);
+  const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=My+Location&waypoints=${start.lat},${start.lng}&destination=${end.lat},${end.lng}&travelmode=driving`;
 
   const mapOptions = {
     styles: [
       {
         elementType: 'geometry',
+        
         stylers: [{ color: '#f5f5f5' }]
       },
+      
       {
         elementType: 'labels.icon',
         stylers: [{ visibility: 'on' }]
