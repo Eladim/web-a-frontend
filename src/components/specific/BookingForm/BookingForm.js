@@ -421,7 +421,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
 
     const getNotesPlaceholder = (type) => {
         if (type === 'arrival') {
-            return 'Flight Ticket or Airport Terminal details';
+            return 'Flight Number or Airport Terminal details';
         } else if (type === 'departure') {
             return 'Specify Address Location';
         }
