@@ -25,10 +25,11 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
         from_location: '',
         to_location: '',
         notes: '',
-        from_lat: '',
-        from_lng: '',
-        to_lat: '',
-        to_lng: '',
+        from_lat: null,
+        from_lng: null,
+        to_lat: null,
+        to_lng: null,
+        amount: '',
     });
 
     const [errors, setErrors] = useState({});
@@ -132,6 +133,8 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
             console.log(`Retrieved Distance to Airport: ${distanceToAirport} km`);
             console.log(`Retrieved Distance: ${distance} km`);
         }
+
+        
         const numericDistance = parseFloat(distance.replace('km', '').trim());
         console.log(`Parsed Numeric Distance: ${numericDistance} km`);
         setIsFormComplete(checkIsFormComplete(formData));
@@ -188,6 +191,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
 
             console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
             console.log(`Total Price After Fee: €${totalPriceAfterFee.toFixed(2)}`);
+            
             setFilteredFees(applicableFees);
 
             setActiveFee(totalFeePercentage);
@@ -195,7 +199,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
         } else {
             console.log('No valid vehicle type selected for calculation.');
         }
-    }, [formData, locations, vehicleTypes, distance]);
+    }, [formData, locations, vehicleTypes, distance, totalPriceAfterFee]);
 
     // Handle changes to "From Location"
     useEffect(() => {
@@ -355,7 +359,25 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
                 return vehicleType;  // Return the original value for other types
         }
     };
+
+    useEffect(() => {
+        // Update the amount field whenever totalPriceAfterFee changes
+        updateFormData();
+    }, [totalPriceAfterFee]);
+    
+    const updateFormData = () => {
+        console.log(`Total Price After Fee: €${totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : 'N/A'}`);
+        
+        setFormData(prevData => ({
+            ...prevData,
+            amount: totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : '',
+        }));
+        
+        console.log(`Updated amount in formData`);
+    };
+    
     const handleChange = (e) => {
+        console.log(`Total Price After Fee: €${totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : 'N/A'}`);
         const { name, value } = e.target;
         if (formData[name] !== value) {
             setFormData({
@@ -401,6 +423,8 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) =
         setIsSubmitting(true);
 
         e.preventDefault();
+
+        
 
         try {
             const response = await BookingService.createBooking(formData);

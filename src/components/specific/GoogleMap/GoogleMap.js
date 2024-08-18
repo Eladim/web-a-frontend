@@ -19,8 +19,12 @@ const Map = ({ center, onSaveLocation }) => {
     console.log('Map center latitude:', center.lat);
     console.log('Map center longitude:', center.lng);
     console.log('Map radius:', center.radius);
+  
+    return () => {
+      console.log('Map component unmounting. Cleaning up.');
+      // Perform any additional cleanup here if needed
+    };
   }, [center]);
-
   const mapContainerStyle = {
     width: '100%',
     height: '400px',

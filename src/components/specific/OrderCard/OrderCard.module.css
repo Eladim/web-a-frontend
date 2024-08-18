@@ -21,7 +21,7 @@
   position: relative; /* This makes the icon positioned relative to this container */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, padding 0.3s ease; /* Added padding transition for smooth collapse */
+  transition: max-height 0.5s ease, padding 0.4s ease; /* Added padding transition for smooth collapse */
   padding-top: 0; /* Start with no padding */
 }
 

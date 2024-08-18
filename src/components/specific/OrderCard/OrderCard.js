@@ -122,7 +122,7 @@ const formatVehicleType = (type) => {
         <p><strong>From:</strong> {order.from_location.name}</p>
         <p><strong>To:</strong> {order.to_location.name}</p>
         <p><strong>Note:</strong> {order.notes}</p>
-        <p><strong>Booking Fee:</strong> {order.booking_amount}</p>
+        <p><strong>Total Cost:</strong> {order.booking_amount}</p>
         <p><strong>Creation date:</strong> {formatDate(order.booking_creation_date)}</p>
         {/* Assign Driver */}
         
