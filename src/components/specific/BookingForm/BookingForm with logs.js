@@ -12,7 +12,7 @@ import InfoIcon from './InfoIcon';
 
 
 
-const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, commissionFree }) => {
+const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted }) => {
     const [formData, setFormData] = useState({
         client: '',
         guest_name: '',
@@ -30,15 +30,9 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
         to_lat: null,
         to_lng: null,
         amount: '',
-        commission_free: commissionFree, // Default to true
+        commission_free: true, // Default to true
     });
-    useEffect(() => {
-        setFormData(prevData => ({
-            ...prevData,
-            commission_free: commissionFree,
-        }));
-        console.log('Commission-free status updated:', commissionFree);
-    }, [commissionFree]);
+    
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -144,7 +138,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
 
         
         const numericDistance = parseFloat(distance.replace('km', '').trim());
-        //console.log(`Parsed Numeric Distance: ${numericDistance} km`);
+        console.log(`Parsed Numeric Distance: ${numericDistance} km`);
         setIsFormComplete(checkIsFormComplete(formData));
         const now = new Date();
         const offset = now.getTimezoneOffset();
@@ -197,15 +191,15 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
                 totalPriceAfterFee = 0;
             }
 
-            //console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
-            //console.log(`Total Price After Fee: €${totalPriceAfterFee.toFixed(2)}`);
+            console.log(`Total Price Before Fee: (€${totalPriceBeforeFee.toFixed(2)})`);
+            console.log(`Total Price After Fee: €${totalPriceAfterFee.toFixed(2)}`);
             
             setFilteredFees(applicableFees);
 
             setActiveFee(totalFeePercentage);
             setTotalPriceAfterFee(totalPriceAfterFee);
         } else {
-           // console.log('No valid vehicle type selected for calculation.');
+            console.log('No valid vehicle type selected for calculation.');
         }
     }, [formData, locations, vehicleTypes, distance, totalPriceAfterFee]);
 
@@ -374,14 +368,14 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
     }, [totalPriceAfterFee]);
     
     const updateFormData = () => {
-        //console.log(`Total Price After Fee: €${totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : 'N/A'}`);
+        console.log(`Total Price After Fee: €${totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : 'N/A'}`);
         
         setFormData(prevData => ({
             ...prevData,
             amount: totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : '',
         }));
         
-        //console.log(`Updated amount in formData`);
+        console.log(`Updated amount in formData`);
     };
 
     const handleChange = (e) => {
@@ -393,8 +387,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
                 [name]: value,
             });
         }
-        console.log('Commission-free status on load:', formData.commission_free);
-        //console.log(`Retrieving Distance`);
+        console.log(`Retrieving Distance`);
     };
 
     const getFilteredLocations = (type, locationType) => {

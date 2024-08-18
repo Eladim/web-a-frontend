@@ -26,6 +26,7 @@ function App() {
           <Route path="/testmap" element={<Test />} />
           <Route path="/googlemap" element={<GoogleMap />} />
           <Route path="/reservation" element={<BookingPage />} />
+          <Route path="/reservation/hotel/:hotelSlug" element={<BookingPage />} />  {/* Dynamic route for hotel-specific booking */}
           <Route path="/" element={<AuthPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/login-page" element={<LoginPage />} />

@@ -41,8 +41,8 @@ apiClient.interceptors.request.use(
 
     if (token && token.length > 0 && !shouldExcludeToken) {
       config.headers['Authorization'] = `Bearer ${token}`;
-      console.log('Authorization Header:', config.headers['Authorization']);  // Log the full Authorization header
-      console.log('Making Request with a JWT Token');
+      //console.log('Authorization Header:', config.headers['Authorization']);  // Log the full Authorization header
+      //console.log('Making Request with a JWT Token');
     } else {
       console.log('No Authorization Header Added');
     }

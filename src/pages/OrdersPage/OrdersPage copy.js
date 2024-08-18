@@ -9,7 +9,6 @@ const OrdersPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [drivers, setDrivers] = useState([]);
-  const [showOngoing, setShowOngoing] = useState(false); // State to toggle ongoing orders
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,11 +18,12 @@ const OrdersPage = () => {
           DriverService.getDrivers(),
         ]);
 
-        // Sort the orders by booking_schedule (date and time)
+        // Sort the orders by booking_schedule
         const sortedOrders = ordersData.orders.sort((a, b) => {
           const dateA = new Date(a.booking_schedule);
           const dateB = new Date(b.booking_schedule);
-          return dateA - dateB; // Sort by both date and time
+        
+          return dateA - dateB; // This will sort by both date and time
         });
         
         setOrders(sortedOrders);  
@@ -38,11 +38,6 @@ const OrdersPage = () => {
     fetchData();
   }, []);
 
-  // Filter orders based on the showOngoing state
-  const filteredOrders = showOngoing 
-    ? orders.filter(order => order.status === 'Ongoing') 
-    : orders;
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -52,21 +47,17 @@ const OrdersPage = () => {
   }
 
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.sidebar}>Sidebar</div>
-      <div className={styles.mainContent}>
-        <div className={styles.navbar}>
-          <button onClick={() => setShowOngoing(!showOngoing)}>
-            {showOngoing ? 'Show All Orders' : 'Show Ongoing Orders'}
-          </button>
-        </div>
-        <div className={styles.searchBar}>
+    <div className={styles.dashboard}> {/* Applying CSS Module class */}
+      <div className={styles.sidebar}>Sidebar</div> {/* Applying CSS Module class */}
+      <div className={styles.mainContent}> {/* Applying CSS Module class */}
+        <div className={styles.navbar}>Navigation bar</div> {/* Applying CSS Module class */}
+        <div className={styles.searchBar}> {/* Applying CSS Module class */}
           <input type="text" placeholder="Search..." />
         </div>
-        <div className={styles.ordersGrid}>
-          {filteredOrders.map(order => (
+        <div className={styles.ordersGrid}> {/* Applying CSS Module class */}
+            {orders.map(order => (
             <OrderCard key={order.id} order={order} drivers={drivers} />
-          ))}
+            ))}
         </div>
       </div>
     </div>

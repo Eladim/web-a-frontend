@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import BookingForm from '../../components/specific/BookingForm/BookingForm';
 import ratesService from '../../services/ratesService';
 import styles from './BookingPage.module.css';
 import BookingService from '../../services/bookingService';
+import { useParams } from 'react-router-dom';
 
 const BookingPage = () => {
   const { hotelSlug } = useParams(); // Get hotelSlug from the URL
-  const navigate = useNavigate(); // For navigation
   const [locations, setLocations] = useState([]);
   const [vehicleTypes, setVehicleTypes] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,40 +16,29 @@ const BookingPage = () => {
     const fetchLocations = async () => {
       try {
         const data = await BookingService.getLocations();
+        setLocations(data);  // Store fetched locations
 
-        if (hotelSlug) {
-          // Check if the hotelSlug matches any qr_booking_url
-          const matchingHotel = data.find(location => {
-            if (location.type === 'hotel' && location.qr_booking_url) {
-              const urlSlug = location.qr_booking_url.split('/').pop();
-              return urlSlug === hotelSlug.toLowerCase(); // Ensure comparison is case-insensitive
-            }
-            return false;
-          });
-
-          if (matchingHotel) {
-            setCommissionFree(false);
-            console.log(`Commission-free status set to false for hotel ${hotelSlug} with ID ${matchingHotel.id}`);
-
-            // Filter out hotels and add only the matching hotel
-            const filteredLocations = data.filter(location => location.type !== 'hotel');
-            filteredLocations.push(matchingHotel);
-
-            setLocations(filteredLocations);
-          } else {
-            console.log("No matching hotel found, redirecting to /reservation");
-            navigate('/reservation'); // Redirect if no hotel matches
+        // Check if the hotelSlug matches any qr_booking_url
+        const matchingHotel = data.find(location => {
+          // Ensure we're only checking locations of type 'hotel' with a valid qr_booking_url
+          if (location.type === 'hotel' && location.qr_booking_url) {
+            // Extract the last part of the URL to compare with hotelSlug
+            const urlSlug = location.qr_booking_url.split('/').pop();
+            return urlSlug === hotelSlug;
           }
+          return false;
+        });
+
+        if (matchingHotel) {
+          setCommissionFree(false);
+          console.log(`Commission-free status set to false for hotel ${hotelSlug} with ID ${matchingHotel.id}`);
         } else {
-          // If no hotelSlug is provided, just use all locations
-          setLocations(data);
+          setCommissionFree(true);
+          console.log("No matching hotel found, default commission-free set to true");
         }
       } catch (error) {
         console.error('Error fetching locations:', error);
         setCommissionFree(true); // Default to true if there's an error
-        if (hotelSlug) {
-          navigate('/reservation'); // Redirect in case of error when a hotelSlug is present
-        }
       }
     };
 
@@ -65,7 +53,8 @@ const BookingPage = () => {
 
     fetchLocations();
     fetchVehicleTypes();
-  }, [hotelSlug, navigate]);
+
+  }, [hotelSlug]);
 
   // Only render BookingForm if commissionFree has been determined
   if (commissionFree === null) {
