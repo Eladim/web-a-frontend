@@ -31,7 +31,7 @@ const AppLayout = () => {
   const actions = getActionsForPage();
 
   // Conditionally render the sidebar
-  const shouldRenderSidebar = !['/login', '/register', '/forgot-password'].includes(location.pathname) &&
+  const shouldRenderSidebar = !['/login', '/register', '/forgot-password', '/'].includes(location.pathname) &&
   !location.pathname.startsWith('/reservation');
 
   return (
