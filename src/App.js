@@ -24,7 +24,7 @@ function App() {
       <div className="App">
         <AppLayout/>
         <Routes>
-          <Route path="/" element={<Qr />} />
+          <Route path="/qr" element={<Qr />} />
           <Route path="/profile-hotel-operator" element={<ProfilePageHotelOperator />} />
           <Route path="/cal" element={<Cal />} />
           <Route path="/hover2" element={<AlphaTest />} />
@@ -34,7 +34,7 @@ function App() {
           <Route path="/googlemap" element={<GoogleMap />} />
           <Route path="/reservation" element={<BookingPage />} />
           <Route path="/reservation/hotel/:hotelSlug" element={<BookingPage />} />  {/* Dynamic route for hotel-specific booking */}
-          <Route path="/login" element={<AuthPage />} />
+          <Route path="/" element={<AuthPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/login-page" element={<LoginPage />} />
         </Routes>
