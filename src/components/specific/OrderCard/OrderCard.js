@@ -231,11 +231,7 @@ const OrderCard = ({ order, drivers, onStatusChange }) => {
           </p>
         )}
 
-        {orderStatus === 'Ongoing' && (
-          <div className={styles.reposition}>
-            <AssignDriver drivers={drivers} onAssignDriver={handleAssignDriver} currentDriverId={order.driver_id} />
-          </div>
-        )}
+
 
         <div className={styles.iconContainer}>
           <FontAwesomeIcon
