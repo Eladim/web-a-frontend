@@ -421,9 +421,9 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
 
     const getNotesPlaceholder = (type) => {
         if (type === 'arrival') {
-            return 'Flight Number or Airport Terminal details';
+            return 'Provide Flight Number and Gate Information for Easy Pickup';
         } else if (type === 'departure') {
-            return 'Specify Address Location';
+            return 'Specify Any Special Requirements';
         }
         return ''; // No placeholder if type is not specified or is not 'arrival' or 'departure'
     };
