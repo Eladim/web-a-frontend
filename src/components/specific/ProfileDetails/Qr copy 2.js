@@ -7,13 +7,14 @@ import logo from '../../../assets/images/tourismBluess.png';
 
 const CustomQRCode = ({ fullReferralUrl, onDownload }) => {
     const qrRef = useRef(null);
+    const qrWrapperRef = useRef(null);
     const qrCode = useRef(null);
 
     useEffect(() => {
         qrCode.current = new QRCodeStyling({
             width: 500,
             height: 500,
-            data: fullReferralUrl,
+            data: fullReferralUrl, // Use the fullReferralUrl prop instead of a hardcoded URL
             image: logo,
             dotsOptions: {
                 color: "#555555",
@@ -43,17 +44,12 @@ const CustomQRCode = ({ fullReferralUrl, onDownload }) => {
 
         qrCode.current.append(qrRef.current);
 
-        return () => {
-            // Clean up: Remove the QR code from the DOM
-            if (qrRef.current) {
-                qrRef.current.innerHTML = "";
-            }
-        };
+        return () => qrCode.current.clear();
     }, [fullReferralUrl]);
 
     return (
         <div className={styles.container}>
-            <div className={styles.qrWrapper}>
+            <div className={styles.qrWrapper} ref={qrWrapperRef}>
                 <div className={styles.qrContainer}>
                     <div ref={qrRef} className={styles.qrCode}></div>
                 </div>

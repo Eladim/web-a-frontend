@@ -3,7 +3,7 @@ import html2canvas from 'html2canvas';
 import CustomQRCode from './Qr'; // Import the Qr.js component
 import styles from './Referral.module.css'; // Import the CSS module
 
-const Referral = ({ bookingUrl, status }) => {
+const Referral = ({ bookingUrl, status  }) => {
   const qrContainerRef = useRef(null); // Reference for the scalable container
 
   // Get the current domain
@@ -30,7 +30,7 @@ const Referral = ({ bookingUrl, status }) => {
       link.href = scaledCanvas.toDataURL('image/png');
       link.click();
     });
-  };
+};
 
 
   return (
