@@ -209,12 +209,7 @@ const OrderCard = ({ order, drivers, onStatusChange }) => {
         <p><strong>Distance:</strong> {Math.round(order.distance)} km</p>
         <p><strong>Note:</strong> {order.notes}</p>
         <p><strong>Total Cost:</strong> {order.booking_amount}</p>
-        <p><strong>Commission Free: </strong>
-          <FontAwesomeIcon
-            icon={order.is_commission_free ? faTimes : faCheck }
-            className={order.is_commission_free ? styles.checkIcon : styles.crossIcon}
-          />
-        </p>
+
         <p><strong>Creation date:</strong> {formatDate(order.booking_creation_date)}</p>
 
         {googleMapsUrl && (
