@@ -435,7 +435,6 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
             // Create a copy of formData and update the fields if they are empty strings
         const updatedFormData = {
             ...formData,
-            commission_free: commissionFree, // Ensure this is up-to-date
             from_lat: formData.from_lat === "" ? null : formData.from_lat,
             from_lng: formData.from_lng === "" ? null : formData.from_lng,
             to_lat: formData.to_lat === "" ? null : formData.to_lat,
