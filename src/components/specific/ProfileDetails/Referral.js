@@ -42,9 +42,9 @@ const Referral = ({ bookingUrl, status  }) => {
           <CustomQRCode fullReferralUrl={fullReferralUrl} onDownload={handleDownload} />
         </div>
       </div>
-      <p>
+      <span>
         Status: {status} {/* Display the status here */}
-      </p>
+      </span>
       <p className={styles.referralLink}>
         Referral link: <a href={fullReferralUrl}>{fullReferralUrl}</a>
       </p>
