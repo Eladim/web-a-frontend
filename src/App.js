@@ -35,6 +35,7 @@ function App() {
           <Route path="/reservation" element={<BookingPage />} />
           <Route path="/reservation/hotel/:hotelSlug" element={<BookingPage />} />  {/* Dynamic route for hotel-specific booking */}
           <Route path="/" element={<AuthPage />} />
+          <Route path="/login" element={<AuthPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/login-page" element={<LoginPage />} />
         </Routes>
