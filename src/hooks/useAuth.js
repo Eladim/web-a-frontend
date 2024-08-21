@@ -11,8 +11,8 @@ export const useAuth = () => {
     try {
       const user = await loginService({ username, password });
 
-      // Set the authentication state with user data
-      setAuthState({ ...user });
+      // Set the authentication state with decoded user data
+      setAuthState(user);
 
       // Clear any previous errors
       setError(null);
@@ -23,7 +23,8 @@ export const useAuth = () => {
       throw err;
     }
   };
-  // Register function (formerly signup)
+
+  // Register function
   const register = async ({ email, password, name }) => {
     try {
       const user = await registerService({ email, password, name });
@@ -52,5 +53,5 @@ export const useAuth = () => {
     logoutService();
   };
 
-  return { authState, login, logout, register, error };  // Updated to return `register` instead of `signup`
+  return { authState, login, logout, register, error };
 };

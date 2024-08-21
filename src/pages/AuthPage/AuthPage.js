@@ -19,7 +19,17 @@ const AuthPage = () => {
       console.log('Server Response:', user);
 
       // Navigate based on user role or any condition you need
-      navigate('/orders');  // or any other route based on the user role
+      if (user.isAdmin) {
+        navigate('/orders');  // Redirect to orders page for admins
+      } else if (user.isDriverOperator) {
+        navigate('/orders');  // Redirect to orders page for driver operators
+      } else if (user.isHotelOperator) {
+        navigate('/profile-hotel-operator');  // Redirect to hotel operator profile page
+      } else if (user.isDriver) {
+        // Redirect to a page specific to drivers, if needed
+      } else if (user.isClient) {
+        // Redirect to a client-specific page, if needed
+      }
     } catch (err) {
       console.error('Login failed:', err);
     } finally {

@@ -37,7 +37,24 @@ const OrderService = {
             throw error;
           });
       },
-  
+      
+
+  /**
+   * Mark an order as complete
+   * @param {number} orderId - The ID of the order to mark as complete
+   * @returns {Promise} - Promise resolving to the updated order
+   */
+  markOrderAsComplete(orderId) {
+    return apiClient.post(`/vehicles/orders/${orderId}/complete/`)
+      .then(response => {
+        console.log('Order marked as complete successfully:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error(`There was an error marking the order with ID ${orderId} as complete!`, error);
+        throw error;
+      });
+  },
 
   /**
    * Fetch the details of a specific order by ID

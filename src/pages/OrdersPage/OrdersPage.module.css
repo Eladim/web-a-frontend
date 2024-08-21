@@ -1,36 +1,93 @@
 .dashboard {
-    display: flex;
-    height: 100vh;
-    background-color: #f7f9fc;
-  }
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Allow the dashboard to expand in height */
+  min-height: 100vh; /* Ensures full height but allows for more space if needed */
+  background-color: #f7f9fc;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Allow the main content to expand as needed */
+}
   
-  .sidebar {
-    width: 250px;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: var(--spacing-medium);
-  }
+
   
-  .mainContent { /* CSS modules use camelCase for class names when imported */
-    flex-grow: 1;
-    padding: var(--spacing-medium);
-    display: flex;
-    flex-direction: column;
-  }
+/* Search Bar Styles */
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px; /* Space below the search bar */
+}
+
+.searchBar input {
+  width: 100%;
+  max-width: 300px; /* Limit the width */
+  padding: 10px 40px 10px 15px; /* Extra padding on the right for the icon */
+  font-size: 16px; /* Consistent font size with links */
+  font-family: var(--font-family-sans); /* Use the same font as the sidebar */
+  color: white; /* White text color */
+  background-color: #343a40; /* Match sidebar background */
+  border: 2px solid #343a40; /* Light blue border */
+  border-radius: 40px; /* Rounded corners */
+  transition: background-color 0.3s ease, border-color 0.8s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.searchBar input::placeholder {
+  color: #ffffff; /* Subtle placeholder color */
+  opacity: 0.8; /* Slightly faded */
+  transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for placeholder text */
+}
+
+.searchBar input:focus, /* Focus state */
+.searchBar input:active, /* Active state */
+.searchBar input:not(:placeholder-shown) /* When someone is typing */ {
+  background-color: white; /* Transition to white background */
+  border-color: #343a40; /* Dark border when active */
+  color: #343a40; /* Change text color to match the sidebar */
+  transition: background-color 0.3s ease, border-color 0.8s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.searchBar input:focus::placeholder,
+.searchBar input:active::placeholder,
+.searchBar input:not(:placeholder-shown)::placeholder {
+  color: #343a40; /* Dark placeholder text */
+  opacity: 0.6; /* Slightly less faded */
+  transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for placeholder text */
+}
+
+
+
+
   
-  .navbar {
-    background-color: var(--primary-color);
-    padding: var(--spacing-medium);
-    color: var(--secondary-color);
-  }
-  
-  .searchBar { /* CamelCase used for the class name */
-    margin: var(--spacing-medium) 0;
-  }
-  
-  .ordersGrid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-medium);
-  }
-  
+.splitContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Ensures the top of the columns align */
+  height: auto; /* Allow container height to adjust based on content */
+  min-height: 100%; /* Ensures it can grow beyond its initial size */
+  gap: 2%; /* Adjust this value to control the space between the columns */
+}
+
+.leftColumn, .rightColumn {
+  width: 48%; /* Slightly less than 50% to add some spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust this gap as needed */
+  flex-grow: 1; /* Allow columns to grow with content */
+}
+
+.leftColumn h2, .rightColumn h2 {
+  margin-bottom: 10px;
+}
+
+.ordersGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

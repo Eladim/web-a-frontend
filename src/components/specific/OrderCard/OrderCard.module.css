@@ -21,7 +21,7 @@
   position: relative; /* This makes the icon positioned relative to this container */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.4s ease; /* Added padding transition for smooth collapse */
+  transition: max-height 0.8s ease, padding 0.6s ease; /* Added padding transition for smooth collapse */
   padding-top: 0; /* Start with no padding */
 }
 
@@ -42,4 +42,75 @@
 
 .icon:hover {
   color: #0056b3;
+}
+
+
+
+/* Container for the action icons */
+.actionContainer {
+  display: flex;
+  flex-direction: column; /* Stack icons vertically */
+  align-items: flex-end;  /* Align icons to the right */
+  height: 100%; /* Take the full height of the container */
+}
+
+/* Checkmark icon styling */
+.checkIcon {
+  font-size: 50px; /* Enlarge the checkmark icon */
+  color: green; /* Example color */
+  cursor: pointer;
+  margin-bottom: auto; /* Push it to the top */
+  flex-grow: 1; /* Take up all available space to push the edit icon down */
+}
+
+/* AssignDriver component (edit icon) styling */
+.actionContainer > *:last-child {
+  margin-top: 0; /* Remove any margin that might push it up */
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.checkIcon {
+  font-size: 50px;
+  color: green;
+  animation: pulse 1.5s infinite;
+}
+
+.checkIcon:hover {
+  animation: none; /* Stop pulsing on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+.slideOut {
+  animation: slideOut 0.3s forwards;
+}
+
+@keyframes slideOut {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.rotateIcon {
+  font-size: 50px;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.reposition {
+  position: absolute; /* Use absolute positioning to place it relative to its parent */
+  right: 0; /* Align the div to the right side of the parent */
+  top: 12%; /* Position the div vertically at the middle */
+  transform: translateY(-50%); /* Adjust to truly center it vertically */
 }

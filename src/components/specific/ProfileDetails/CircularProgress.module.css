@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Even out the spacing */
+    width: 100%;
+    max-width: 120px; /* Control the maximum width of the container */
+}
+
+.textWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px; /* Increase space between the text and the circle for better separation */
+}
+
+.circleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* Adjust space between the description text and the circle */
+}
+
+.valueDisplay {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: #333;
+    margin-bottom: 10px; /* Add some spacing below the value text */
+}
+
+.descriptionText {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 8px; /* Space between the description and the circle */
+    text-align: center;
+    font-weight: var(--font-weight-bold); /* Make the description text bold for emphasis */
+    text-transform: uppercase; /* Make the description text uppercase for consistency */
+    letter-spacing: 0.05em; /* Add slight letter spacing */
+}
+
+.circle {
+    width: 110px; /* Slightly larger size for more prominence */
+    height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary-color) 0deg, #e6e6e6 0deg); /* Smooth color transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add a subtle shadow for depth */
+}
+
+.circle::before {
+    content: "";
+    width: 72%; /* Slightly increase the width for a thinner ring */
+    height: 72%;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+}
+
+.circleText {
+    position: absolute;
+    font-size: 1.6rem; /* Increase the font size slightly */
+    font-weight: bold;
+    color: #333;
+    z-index: 2;
+}
+
+/* Keyframes for the pulse animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}

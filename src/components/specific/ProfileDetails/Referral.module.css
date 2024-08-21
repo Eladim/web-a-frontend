@@ -1,0 +1,57 @@
+/* src/components/Referral/Referral.module.css */
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .referralContainer {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure elements are spaced between top and bottom */
+    align-items: center;
+    height: 100%; /* Make sure the container takes up the full height */
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .title {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .qrCodeWrapper {
+    max-width: 450px;
+    max-height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust the space below the QR code */
+  }
+  
+  .scalableContainer {
+    position: relative; /* Change position to relative to allow repositioning */
+    top: 20px; /* Move the container 150px down from its original position */
+    transform: scale(0.7); /* Scale down the entire component */
+    transform-origin: center; /* Keep the scaling centered */
+    width: fit-content;
+  }
+  
+  .referralLink {
+    margin-top: auto; /* Pushes the <p> element to the bottom */
+    color: inherit; /* Remove stylizing from "Referral link" */
+  }
+  
+  .referralLink a {
+    color: #0073e6; /* Only the actual URL gets the color */
+    text-decoration: none;
+  }
+  
+  .referralLink a:hover {
+    text-decoration: underline;
+  }

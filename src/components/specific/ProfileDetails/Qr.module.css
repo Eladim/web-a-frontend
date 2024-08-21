@@ -1,0 +1,92 @@
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .heading {
+    color: #333;
+    font-size: 2.5rem;
+  }
+  
+  .qrWrapper {
+    display: inline-block;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 30px;
+    background: #2a65a1; /* Steel blue gradient */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position the overlay and the icon */
+    overflow: hidden; /* Ensures QR code respects rounded corners */
+  }
+  
+  .qrOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Smooth transition for the overlay */
+    z-index: 1; /* Make sure the overlay is above the QR code but below the icon */
+  }
+  
+  .qrWrapper:hover .qrOverlay {
+    opacity: 1; /* Show the overlay on hover */
+  }
+  
+  .downloadIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 40px;
+    z-index: 2; /* Make sure the icon is above everything else */
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Smooth transition for showing the icon */
+  }
+  
+  .qrWrapper:hover .downloadIcon {
+    font-size: 40px;
+    opacity: 1; /* Show the icon on hover */
+    transition: opacity 0.3s ease,
+  }
+  
+  .downloadIcon:hover {
+    color: #ddd; /* Slight color change on hover for the icon */
+    transition: color 0.3s ease; /* Ensure smooth color change on hover */
+}
+  
+  .qrCode {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px; /* Ensure the QR code respects the rounded corners */
+    overflow: hidden;
+  }
+  
+  .pickMeUp {
+    color: white;
+    font-size: 4.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+    letter-spacing: 0.05em; /* Add slight spacing between letters */
+  }
+  .qrContainer {
+    height:500px;
+    border-radius: 30px;
+    padding-bottom: 0px; /* padding-bottom cannot have negative values */
+  }
+  
+  .companyName {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+  

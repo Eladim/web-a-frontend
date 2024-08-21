@@ -1,37 +1,37 @@
+import { jwtDecode as jwt_decode } from 'jwt-decode';
 import apiClient from './api';
 
-// Function to handle user login
 export const loginService = async ({ username, password }) => {
   try {
     const response = await apiClient.post('/token/', { username, password });
 
-    // Extract the tokens from the response
     const { access, refresh } = response.data;
+
+    // Decode the JWT payload to extract user info
+    const decodedToken = jwt_decode(access);
+    const userInfo = {
+      userId: decodedToken.user_id,
+      username: decodedToken.username,
+      isAdmin: decodedToken.is_admin,
+      isHotelOperator: decodedToken.is_hotel_operator,
+      isClient: decodedToken.is_client,
+      isDriver: decodedToken.is_driver,
+      isDriverOperator: decodedToken.is_driver_operator,
+      accessToken: access,  // Keep the access token for future API requests
+      refreshToken: refresh, // Store refresh token if needed
+    };
 
     // Store the tokens in localStorage
     localStorage.setItem('access_token', access);
     localStorage.setItem('refresh_token', refresh);
 
-    // Log tokens after storing
-    const storedAccessToken = localStorage.getItem('access_token');
-    console.log('Stored Access Token:', storedAccessToken);
-    console.log('Access Token Length:', storedAccessToken ? storedAccessToken.length : 'undefined or null');
-
-    // Log the entire localStorage
-    console.log('Full localStorage:', JSON.stringify(localStorage));
-
-    // Decode the JWT payload to extract the user_id
-    const userId = JSON.parse(atob(access.split('.')[1])).user_id;
-
-    // Log the user ID
-    console.log('User ID:', userId);
-
-    return { user_id: userId };  // Return the user ID to be stored in authState
+    return userInfo;  // Return the decoded user info
   } catch (error) {
     console.error('Login failed:', error);
     throw error;
   }
 };
+
 
 
 

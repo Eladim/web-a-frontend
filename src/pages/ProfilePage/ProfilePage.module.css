@@ -1,0 +1,97 @@
+/* src/pages/ProfilePage/ProfilePage.module.css */
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: var(--background-color);
+    transform: 0.8;
+  }
+
+.userProfileContainer {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    padding-top: 0px;
+    background-color: var(--background-color);
+  }
+  
+  .profileAndReferralContainer {
+    display: flex;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden; /* Ensure that children with rounded corners don’t overflow */
+  }
+  
+  .profileDetailsContainer {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .referralContainer {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+  }
+
+.profitLogsContainer {
+  width: 90%; /* Occupies a generous amount of space */
+  max-width: 1200px;
+  margin: 0 auto; /* Center the table container */
+  padding: 20px;
+  background-color: var(--secondary-color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+  
+  /* src/pages/ProfilePage/ProfilePage.module.css */
+
+.circularProgressOverlay {
+    position: fixed;
+    top: 70px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right edge of the page */
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border-radius: 12px; /* Optional: rounded corners */
+    box-shadow: var(--box-shadow); /* Apply box shadow from your theme */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between the CircularProgress components */
+  }
+  
+/* src/pages/ProfilePage/ProfilePage.module.css */
+
+.hotelName {
+  font-size: 2rem; /* Slightly larger font size for emphasis */
+  color: #333; /* Match the text color used in the profile details */
+  font-weight: var(--font-weight-bold); /* Bold font weight */
+  text-align: center; /* Center align the hotel name */
+  margin-bottom: var(--spacing-large); /* Space below the hotel name */
+  padding: var(--spacing-small); /* Add padding around the hotel name *
+  width: 100%; /* Ensure it spans the full width */
+  max-width: 600px; /* Match the width of the profile details container */
+  margin: 0 auto var(--spacing-large); /* Center it and add margin below */
+  animation: fadeInUp 0.5s ease-in-out forwards; /* Add the fade-in animation */
+  transition: box-shadow 0.3s ease; /* Smooth transition for the box shadow */
+}
+
+/* Keep the animation keyframes consistent */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+  

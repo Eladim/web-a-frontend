@@ -1,0 +1,45 @@
+.orderCard {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 10px 16px; /* Top/bottom padding: 6px, left/right padding: 16px */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; /* Space between top section and details */
+}
+
+.orderDetails {
+  position: relative; /* This makes the icon positioned relative to this container */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.4s ease; /* Added padding transition for smooth collapse */
+  padding-top: 0; /* Start with no padding */
+}
+
+.orderCard.expanded .orderDetails {
+  max-height: 800px; /* Adjust this height as needed */
+  padding-top: 16px; /* Add padding when expanded */
+}
+
+
+.icon {
+  cursor: pointer;
+  font-size: 50px;
+  color: #007bff;
+  position: absolute;  /* Position the icon absolutely */
+  bottom: 10px;        /* Position 10px from the bottom */
+  right: 10px;         /* Position 10px from the right */
+}
+
+.icon:hover {
+  color: #0056b3;
+}

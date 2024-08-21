@@ -1,0 +1,126 @@
+/* src/components/ProfitLogsTable/ProfitLogsTable.module.css */
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Increase margin for better spacing */
+}
+
+.headerTitle {
+  font-size: 1.75rem; /* Slightly larger for better emphasis */
+  color: #333;
+  font-weight: bold; /* Make the title bolder */
+}
+
+.exportButton {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #357ABD 100%); /* Gradient background */
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: 12px 24px; /* More padding for a substantial feel */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Specify background-color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Deeper shadow for more depth */
+    font-size: 1rem; /* Slightly larger font size */
+    font-weight: bold; /* Bold text for emphasis */
+    letter-spacing: 0.5px; /* Slight spacing between letters */
+  }
+  
+  .exportButton:hover {    
+    background: linear-gradient(135deg, #357ABD 0%, #2a65a1 100%); /* Darker gradient on hover */
+    transform: translateY(-3px); /* Slightly more lift on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  }
+  
+  .exportButton:active {
+    transform: translateY(0); /* Reset lift effect on click */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Reset shadow on click */
+    background: linear-gradient(135deg, #2a65a1 0%, #1f4d8a 100%); /* Slightly darker gradient on click */
+  }
+  
+  .exportButton:focus {
+    outline: none;
+    /*box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.4); /* Add a focus ring */
+  }
+  
+  .exportButton:disabled {
+    background: linear-gradient(135deg, #d3d3d3 0%, #b5b5b5 100%); /* Greyed-out gradient for disabled state */
+    color: #777;
+    cursor: not-allowed;
+    box-shadow: none; /* Remove shadow for disabled state */
+    transform: none; /* No lift effect for disabled state */
+  }
+  
+
+  .logoutButton {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  
+  .logoutButton:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .logoutButton:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #a93226 0%, #8e2b22 100%);
+  }
+  
+  .logoutButton:focus {
+    outline: none;
+  }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+  border-radius: var(--border-radius); /* Rounded corners for the table */
+  overflow: hidden; /* Ensure rounded corners are respected */
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 14px; /* Increase padding for better spacing */
+  text-align: left;
+  vertical-align: middle; /* Ensure content is vertically centered */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.table th {
+  background-color: #f7f9fc; /* Slightly lighter background for headers */
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase; /* Make header text uppercase for distinction */
+  letter-spacing: 0.05em; /* Add slight spacing between letters */
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #eef1f5; /* Slightly darker hover effect */
+}
+
+.table tr {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.table tr:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow effect on hover */
+}
+

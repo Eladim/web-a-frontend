@@ -162,7 +162,7 @@
   background-color: var(--primary-color);
   color: var(--primary-color);
   transform: scale(1.01); /* Slightly increase the size */
-  padding: 1px; /* Increase padding to make the background thicker */
+  padding: 2px; /* Increase padding to make the background thicker */
 }
 
 .actions {

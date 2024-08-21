@@ -31,6 +31,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
         to_lng: null,
         amount: '',
         commission_free: commissionFree, // Default to true
+        distance: null,
     });
     useEffect(() => {
         setFormData(prevData => ({
@@ -127,7 +128,6 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
 
 
         let selectedLocation = null;
-        let distanceToAirport = 0;
         let selectedVehicle = null;
 
         if (formData.type === 'arrival') {
@@ -136,11 +136,9 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
             selectedLocation = locations.find(loc => loc.id === parseInt(formData.from_location));
         }
 
-        if (selectedLocation && selectedLocation.type === 'hotel') {
-            distanceToAirport = selectedLocation.distance_to_airport;
-            console.log(`Retrieved Distance to Airport: ${distanceToAirport} km`);
-            console.log(`Retrieved Distance: ${distance} km`);
-        }
+
+        console.log(`Retrieved Distance: ${distance} km`);
+        
 
         
         const numericDistance = parseFloat(distance.replace('km', '').trim());
@@ -371,14 +369,16 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
     useEffect(() => {
         // Update the amount field whenever totalPriceAfterFee changes
         updateFormData();
-    }, [totalPriceAfterFee]);
+    }, [totalPriceAfterFee, distance]);
     
     const updateFormData = () => {
         //console.log(`Total Price After Fee: €${totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : 'N/A'}`);
+        const numericDistance = parseFloat(distance.replace('km', '').trim());
         
         setFormData(prevData => ({
             ...prevData,
             amount: totalPriceAfterFee ? totalPriceAfterFee.toFixed(2) : '',
+            distance: numericDistance || null,  // Update the distance field
         }));
         
         //console.log(`Updated amount in formData`);
@@ -432,11 +432,19 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
         setIsSubmitting(true);
 
         e.preventDefault();
-
-        
+            // Create a copy of formData and update the fields if they are empty strings
+        const updatedFormData = {
+            ...formData,
+            commission_free: commissionFree, // Ensure this is up-to-date
+            from_lat: formData.from_lat === "" ? null : formData.from_lat,
+            from_lng: formData.from_lng === "" ? null : formData.from_lng,
+            to_lat: formData.to_lat === "" ? null : formData.to_lat,
+            to_lng: formData.to_lng === "" ? null : formData.to_lng,
+        };
+            
 
         try {
-            const response = await BookingService.createBooking(formData);
+            const response = await BookingService.createBooking(updatedFormData);
             console.log('Booking successful:', response);
             setIsSubmitted(true);  // Show success message
             setTimeout(() => {

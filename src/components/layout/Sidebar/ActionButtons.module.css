@@ -1,0 +1,38 @@
+/* Reuse the same styles */
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navButton {
+  color: white;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s, color 0.3s, border-color 0.3s;
+  font-family: var(--font-family-sans);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Hover effect */
+.navButton:hover {
+  color: #343a40;
+  background-color: white;
+  border-color: white;
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Active (clicked) effect */
+.navButton:active {
+  transform: scale(0.95); /* Slightly reduce the size */
+  background-color: #e0e0e0; /* Change background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}

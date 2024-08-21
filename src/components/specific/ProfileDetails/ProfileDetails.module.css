@@ -1,0 +1,70 @@
+.profileDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-medium);
+    border-radius: var(--border-radius);
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    animation: fadeInUp 0.5s ease-in-out forwards;
+    transition: max-width 0.5s ease, box-shadow 0.3s ease;
+}
+
+.profileField {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-medium);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius);
+    background-color: #f9f9f9; /* Light background for each field */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profileLabel {
+    font-weight: var(--font-weight-bold);
+    color: #555;
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-small);
+}
+
+.profileValue {
+    font-weight: var(--font-weight-normal);
+    color: #333;
+    font-size: var(--font-size-large);
+    padding: var(--spacing-small);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* Ensures the span respects width and wraps */
+    width: 97%; /* Adjust width as necessary, or set a max-width */
+    word-wrap: break-word; /* Break words that are too long */
+    white-space: normal; /* Allow text to wrap onto a new line */
+}
+
+.profileValue:hover {
+    background-color: #eef1f5;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profileField:last-child {
+    margin-bottom: 0;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

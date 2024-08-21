@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals'
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
+import { AppProvider } from './context/AppContext';  // Import AppProvider
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AuthProvider>  {/* Wrap the application with AuthProvider */}
+  <AuthProvider>  {/* Wrap the application with AuthProvider */}
+    <AppProvider>  {/* Wrap the application with AppProvider */}
       <App />
-    </AuthProvider>
+    </AppProvider>
+  </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

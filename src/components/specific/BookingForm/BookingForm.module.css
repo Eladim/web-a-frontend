@@ -13,25 +13,41 @@
 }
 /* When the success message is visible */
 .successMessage {
-  height: 1152px; /* Start height */
+  height:  1653px; /* Start height */
   overflow: hidden; /* Prevent overflow */
 }
 
 .successMessage.shrink {
-  height: 145px; /* End height */
+  height: auto;
 }
 
 @keyframes shrinkHeight {
   from {
-    height: 1152px;
+    height: 1653px;
   }
   to {
-    height: 145px;
+    height: 150px; /* End height */
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  @keyframes shrinkHeight {
+    from {
+      height: 1653px;
+    }
+    to {
+      height: 190px; /* Adjust to a larger height for smaller screens */
+    }
+  }
+
+  .successMessage.shrink {
+    animation: shrinkHeight 0.8s ease-in-out forwards;
   }
 }
 
 .successMessage.shrink {
-  animation: shrinkHeight 0.5s ease-in-out forwards;
+  animation: shrinkHeight 0.8s ease-in-out forwards;
 }
 
 /* Specific styling for fields in BookingForm */
@@ -149,6 +165,8 @@
     background-color: #ccc;
     border-radius: 34px;
     transition: 0.4s;
+    width: 50px;
+    height: 24px;
   }
   
   .slider:before {
@@ -156,7 +174,7 @@
     content: "";
     height: 20px;
     width: 20px;
-    left: 2px;
+    left: 3px;
     bottom: 2px;
     background-color: white;
     border-radius: 50%;
@@ -168,7 +186,7 @@
   }
   
   input:checked + .slider:before {
-    transform: translateX(19px);
+    transform: translateX(24px);
   }
   
   /* Optional: Add a shadow effect when the toggle is active */

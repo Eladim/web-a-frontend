@@ -19,8 +19,14 @@ const BookingService = {
         console.error('Response data:', error.response.data);
         console.error('Response status:', error.response.status);
         console.error('Response headers:', error.response.headers);
+
+        // Check if the error response contains non_field_errors
+        if (error.response.data && error.response.data.non_field_errors) {
+          // Handle specific backend error message
+          throw new Error(error.response.data.non_field_errors.join(' '));
+        }
       }
-      throw error;
+      throw new Error('Failed to create booking. Please try again.');
     });
   },
 

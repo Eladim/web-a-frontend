@@ -9,20 +9,18 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    if (authState?.username) {
-      console.log(`Authorized as ${authState.username}`);
-    }
-
     if (authState) {
+      console.log(`Authorized as ${authState.username}`);
+
       localStorage.setItem('authState', JSON.stringify(authState));
-      
+
       // Only set access_token if it's defined
       if (authState.accessToken) {
         localStorage.setItem('access_token', authState.accessToken);
       }
     } else {
       localStorage.removeItem('authState');
-      localStorage.removeItem('access_token'); // Remove JWT from localStorage on logout
+      localStorage.removeItem('access_token');
     }
   }, [authState]);
 

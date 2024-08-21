@@ -13,6 +13,8 @@ const apiClient = axios.create({
 const refreshToken = async () => {
   const refresh_token = localStorage.getItem('refresh_token');
   if (!refresh_token) {
+    alert('Your session has expired. Please log in again.');
+    window.location.href = '/login'; // Redirect to the login page
     throw new Error('No refresh token available');
   }
 
@@ -24,8 +26,15 @@ const refreshToken = async () => {
     localStorage.setItem('access_token', access);
     return access;
   } catch (error) {
-    // Handle error (e.g., redirect to login page if refresh fails)
-    console.error('Failed to refresh token', error);
+    if (error.response && error.response.status === 401) {
+      // Handle token refresh failure (e.g., refresh token has expired)
+      alert('Your session has expired. Please log in again.');
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      window.location.href = '/login'; // Redirect to the login page
+    } else {
+      console.error('Failed to refresh token', error);
+    }
     throw error;
   }
 };

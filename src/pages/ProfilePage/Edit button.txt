@@ -1,0 +1,64 @@
+import React, { useEffect, useState } from 'react';
+import profileService from '../../services/profileService';
+import './ProfilePage.module.css';
+
+const ProfilePage = () => {
+    const [profile, setProfile] = useState({
+        username: '',
+        email: '',
+        first_name: '',
+        last_name: '',
+        profile: {
+            telephone: '',
+            address: ''
+        }
+    });
+
+    useEffect(() => {
+        profileService.getProfile()
+            .then(data => {
+                setProfile(data);
+            })
+            .catch(error => {
+                console.error('Error fetching profile:', error);
+            });
+    }, []);
+
+    const handleUpdateProfile = () => {
+        // Example of updating profile data
+        const updatedProfile = {
+            ...profile,
+            profile: {
+                ...profile.profile,
+                address: 'New Address'  // Update address as an example
+            }
+        };
+
+        profileService.updateProfile(updatedProfile)
+            .then(updatedData => {
+                setProfile(updatedData);
+                alert('Profile updated successfully!');
+            })
+            .catch(error => {
+                console.error('Error updating profile:', error);
+                alert('Failed to update profile');
+            });
+    };
+
+    return (
+        <div className="profile-container">
+            <h1>Profile</h1>
+            <div className="profile-details">
+                <p><strong>Username:</strong> {profile.username}</p>
+                <p><strong>Email:</strong> {profile.email}</p>
+                <p><strong>First Name:</strong> {profile.first_name}</p>
+                <p><strong>Last Name:</strong> {profile.last_name}</p>
+                <p><strong>Telephone:</strong> {profile.profile.telephone}</p>
+                <p><strong>Address:</strong> {profile.profile.address}</p>
+            </div>
+            <button onClick={handleUpdateProfile}>Update Profile</button>
+        </div>
+    );
+};
+
+export default ProfilePage;
