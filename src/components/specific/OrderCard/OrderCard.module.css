@@ -114,3 +114,16 @@
   top: 12%; /* Position the div vertically at the middle */
   transform: translateY(-50%); /* Adjust to truly center it vertically */
 }
+
+.customCheckIcon {
+  color: green;       /* Green color for check icon */
+  font-size: 16px;    /* Adjust size as needed */
+  margin-left: 5px;   /* Optional: Add some spacing to the left */
+}
+
+.crossIcon {
+  color: red;         /* Red color for cross icon */
+  font-size: 16px;    /* Adjust size as needed */
+  margin-left: 5px;   /* Optional: Add some spacing to the left */
+}
+

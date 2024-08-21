@@ -44,6 +44,7 @@ const ProfilePageHotelOperator = () => {
   const paidAmount = parseFloat(commissionObligation?.paid_amount) || 0;
   const remainingProfit = parseFloat(commissionObligation?.profit) || 0;
 
+  const status = user.hotel.qr_codes[0]?.status ? 'Active' : 'Inactive'; // Add optional chaining to prevent errors if qr_codes or status is undefined
 
   const profitLogs = user.commission_obligations?.[0]?.profit_logs || []; // Assuming you take the first commission obligation for simplicity
   const bookingUrl = user?.hotel?.location?.qr_booking_url || user?.hotel?.qr_codes?.[0]?.booking_url || "/default-booking-url"; // Fallback to a default if not found
@@ -66,7 +67,7 @@ const ProfilePageHotelOperator = () => {
             />
           </div>
           <div className={styles.referralContainer}>
-            <Referral bookingUrl={bookingUrl} />
+          <Referral bookingUrl={bookingUrl}   status={status}/>
           </div>
         </div>
   

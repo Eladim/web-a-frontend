@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
   const bookingUrl = "/reservation/hotel/regnum-bansko-ski-hotel-spa";
   const companyName = "My Company Name"; // Your company name
-
+  const status = user.hotel.qr_codes[0].status ? 'Active' : 'Inactive'; // Get status of QR URL
 
 
   const profitLogs = user.commission_obligations?.[0]?.profit_logs || []; // Assuming you take the first commission obligation for simplicity
@@ -60,7 +60,7 @@ const ProfilePage = () => {
           />
         </div>
         <div className={styles.referralContainer}>
-          <Referral bookingUrl={bookingUrl} />
+          <Referral bookingUrl={bookingUrl}   status={status}/>
         </div>
       </div>
 
