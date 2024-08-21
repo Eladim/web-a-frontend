@@ -430,6 +430,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
 
     const handleSubmit = async (e) => {
         setIsSubmitting(true);
+        setErrors({});
 
         e.preventDefault();
         // Create a copy of formData and update the fields if they are empty strings
@@ -694,6 +695,7 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
                         min={minDateTime}
                         required
                     />
+                    
 
 
                     <FormInput
@@ -763,25 +765,9 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
                             </div>
                         )}
                     </div>
-                    <button
-                        type={showViewMap ? "submit" : "button"}
-                        onClick={(e) => {
-                            if (!showViewMap) {
-                                e.preventDefault(); // Prevent form submission
-                                handleViewMapClick(); // Trigger the view map logic
-                            }
-                        }}
-                        disabled={
-                            (showViewMap && isSubmitting) || (!showViewMap && (!start || !end))
-                        } // Disable based on conditions
-                        className={!showViewMap && (!start || !end) ? 'disabled' : ''}
-                    >
-                        {isSubmitting
-                            ? 'Submitting...'
-                            : showViewMap
-                                ? 'Submit Booking'
-                                : 'Approve Path'}
-                    </button>
+                    <button type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? 'Submitting...' : 'Submit Booking'}
+                        </button>
 
 
 

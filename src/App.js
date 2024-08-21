@@ -15,6 +15,7 @@ import Cal from './components/specific/GoogleMap/calculatortest.js'
 import ProfilePageHotelOperator from './pages/ProfilePage/ProfilePageHotelOperator';
 import Qr from './Qr'
 import AppLayout from './AppLayout'; // Import the new AppLayout component
+import Time from './Time'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       <div className="App">
         <AppLayout/>
         <Routes>
+        <Route path="/time" element={<Time />} />
           <Route path="/qr" element={<Qr />} />
           <Route path="/profile-hotel-operator" element={<ProfilePageHotelOperator />} />
           <Route path="/cal" element={<Cal />} />
