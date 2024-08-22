@@ -588,9 +588,8 @@ const BookingForm = ({ vehicleTypes, locations, isSubmitted, setIsSubmitted, com
                         onChange={handleChange}
                         error={errors.group_size}
                         required
-                        vehicleType={formData.vehicle_type} // Pass the selected vehicle type here
+                        min="1"  // Ensure the group size cannot be less than 1
                     />
-
 
                     <FormInput
                         label="Booking Type"

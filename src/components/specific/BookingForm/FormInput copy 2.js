@@ -11,11 +11,9 @@ const FormInput = ({
   required = false,
   children,
   placeholder,
-  vehicleType, // Add vehicleType prop to handle group size logic
 }) => {
   const [minDateTime, setMinDateTime] = useState('');
   const [defaultDateTime, setDefaultDateTime] = useState('');
-  const [maxGroupSize, setMaxGroupSize] = useState(1); // Default max group size
 
   useEffect(() => {
     if (type === 'datetime-local') {
@@ -41,25 +39,7 @@ const FormInput = ({
       setMinDateTime(localMinISOTime);
       setDefaultDateTime(localDefaultISOTime);
     }
-
-    // Set max group size based on vehicle type
-    if (type === 'number' && name === 'group_size') {
-      switch (vehicleType) {
-        case 'standard':
-        case 'executive':
-          setMaxGroupSize(4);
-          break;
-        case 'van':
-          setMaxGroupSize(8);
-          break;
-        case 'minibus':
-          setMaxGroupSize(16);
-          break;
-        default:
-          setMaxGroupSize(1); // Default case
-      }
-    }
-  }, [type, name, vehicleType]);
+  }, [type]);
 
   const handleFocus = () => {
     if (!value && type === 'datetime-local') {
@@ -99,7 +79,6 @@ const FormInput = ({
           required={required}
           placeholder={placeholder}
           min={type === 'datetime-local' ? minDateTime : undefined}
-          max={type === 'number' && name === 'group_size' ? maxGroupSize : undefined}
         />
       )}
       {error && <p className={styles.formError}>{error}</p>}
