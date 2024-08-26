@@ -1,3 +1,8 @@
+// Redirect to HTTPS if not already on HTTPS and not in development mode
+if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
+  window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+}
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
