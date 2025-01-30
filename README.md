@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setting env
+
+In the project directory, create env file and set these vars:
+
+REACT_APP_NGROK_URL=https://5385-37-63-18-65.ngrok-free.app
+
+REACT_APP_GOOGLE_MAPS_API_KEY= Your Google Maps API Key
+
+STRIPE_PUBLISHABLE_KEY=Your Stripe Publishable Key
+
+REACT_APP_API_BASE_URL=http://127.0.0.1:8000/api
+
+REACT_APP_BACK_END_SERVER=http://127.0.0.1:8000
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -68,3 +82,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
